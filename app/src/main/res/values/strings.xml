@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RecyclerViewAnimations</string>
+    <string name="tran">item_animation_fall_down</string>
+</resources>

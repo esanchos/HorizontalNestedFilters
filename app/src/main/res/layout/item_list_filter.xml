@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/containerListFilter"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/filterItemMarginVertical"
+    android:paddingBottom="@dimen/filterItemMarginVertical"
+    android:paddingStart="@dimen/filterItemMarginSides"
+    android:paddingEnd="@dimen/filterItemMarginSides">
+
+    <TextView
+        android:id="@+id/filterTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/filterTextPaddingSides"
+        android:paddingEnd="@dimen/filterTextPaddingSides"
+        android:paddingTop="@dimen/filterTextPaddingVertical"
+        android:paddingBottom="@dimen/filterTextPaddingVertical"
+        android:gravity="center_vertical"
+        android:textColor="@color/filterTextColor"
+        android:textSize="@dimen/filterTextSize"
+        android:transitionName="@string/tran"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Ação" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
