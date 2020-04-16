@@ -1,10 +1,5 @@
 package com.earaujo.recyclerviewanimations
 
-import android.transition.ChangeBounds
-import android.transition.Transition
-import android.transition.TransitionManager
-import android.transition.TransitionSet
-import android.transition.TransitionSet.ORDERING_TOGETHER
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,10 +57,10 @@ class FilterAdapter(
             itemSelected = position
             removeEveryOtherItem(position)
         } else {
-            addEveryOtherItem(itemSelected)
+            val oldSelection = itemSelected
             itemSelected = -1
+            addEveryOtherItem(oldSelection)
         }
-
     }
 
     inner class FilterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -73,66 +68,10 @@ class FilterAdapter(
             itemView.filterTextView.text = items[layoutPosition]
             updateLayout()
             itemView.setOnClickListener {
-                if (itemSelected < 0) removeItems() else addItems()
-                selectData(layoutPosition)
                 if (itemSelected < 0) callback(null) else callback(itemView)
+                selectData(layoutPosition)
                 updateLayout()
             }
-        }
-
-        private fun removeItems() {
-            val transition = TransitionSet().apply {
-                duration = 200
-                ordering = ORDERING_TOGETHER
-                startDelay = 200
-                excludeChildren(itemView, true)
-                excludeTarget(itemView, true)
-                addTransition(ChangeBounds())
-                addListener(object : Transition.TransitionListener {
-                    override fun onTransitionEnd(p0: Transition?) {
-                        /*(itemView.parent as ViewGroup).background = TransitionDrawable(
-                            arrayOf(
-                                itemView.context.getBitmap(R.drawable.shape_recycler_background),
-                                itemView.context.getBitmap(R.drawable.ic_divider)
-                            )
-                        ).apply {
-                            startTransition(100)
-                        }*/
-                    }
-
-                    override fun onTransitionResume(p0: Transition?) {
-                    }
-
-                    override fun onTransitionPause(p0: Transition?) {
-                    }
-
-                    override fun onTransitionCancel(p0: Transition?) {
-                    }
-
-                    override fun onTransitionStart(p0: Transition?) {
-                    }
-                })
-            }
-            TransitionManager.beginDelayedTransition(itemView.parent as ViewGroup, transition)
-        }
-
-        private fun addItems() {
-            /*(itemView.parent as ViewGroup).background = TransitionDrawable(
-                arrayOf(
-                    itemView.context.getBitmap(R.drawable.ic_divider),
-                    itemView.context.getBitmap(R.drawable.shape_recycler_background)
-                )
-            ).apply {
-                startTransition(0)
-            }*/
-            val transition = TransitionSet().apply {
-                duration = 200
-                ordering = ORDERING_TOGETHER
-                excludeChildren(itemView, true)
-                excludeTarget(itemView, true)
-                addTransition(ChangeBounds())
-            }
-            TransitionManager.beginDelayedTransition(itemView.parent as ViewGroup, transition)
         }
 
         private fun updateLayout() {
